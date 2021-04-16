@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info"
+	strict="true">
+	<Properties>
+		<Property name="filePath">C:\\Users\\eroyshr\\Desktop</Property>
+		<Property name="filename">C:\\Users\\eroyshr\\Desktop\\rest.log
+		</Property>
+		<property name="logMsgPattern">%d{HH:mm:ss} %-5level - %msg%n</property>
+		<property name="logSize">100 MB</property>
+	</Properties>
+	<Appenders>
+
+		<RollingFile name="RollingFile" fileName="${filename}"
+			filePattern="${filePath}/$${date:yyyy-MM-dd}/csc-%d{dd-MM-yyyy}-%i.log">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy
+					size="${logSize}" />
+
+			</Policies>
+		</RollingFile>
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d %p %c{1.} [%t] %m%n" />
+		</Console>
+
+
+
+	</Appenders>
+	<Loggers>
+
+		<Root level="info">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="Console" />
+
+			<!-- Use FLOW to trace down exact method sending the msg -->
+			<!-- <AppenderRef ref="FLOW" /> -->
+		</Root>
+	</Loggers>
+</Configuration>
